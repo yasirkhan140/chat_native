@@ -7,6 +7,14 @@ export default function RootLayout() {
           // Hide the header for this route
           headerShown: false,
         }}/>
+        <Stack.Screen name="welcome" options={{
+          // Hide the header for this route
+          headerShown: false,
+        }}/>
+        <Stack.Screen name="(auth)" options={{
+          // Hide the header for this route
+          headerShown: false,
+        }}/>
     </Stack>
   );
 }
