@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { subscribeForKeyboardEvents } from "react-native-reanimated/lib/typescript/reanimated2/core";
 const login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const loginValidationSchema = yup.object().shape({
