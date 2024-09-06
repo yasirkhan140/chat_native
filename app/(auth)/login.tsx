@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Formik } from "formik";
+import { Formik, isEmptyArray } from "formik";
 import * as yup from "yup";
 const login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,9 +23,17 @@ const login = () => {
       .min(8, ({ min }) => `Password must be at least ${min} characters`)
       .required("Password is required"),
   });
-  const submitForm =(e:{email:string,password:string})=>{
-    console.log(e)
-  }
+  const submitForm = async (e: { email: string; password: string }) => {
+    const body = {
+      ...e,
+    };
+    const request:RequestInit = {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {'Content-Type':'application/json'}as HeadersInit
+    };
+    const response = await fetch("http://localhost:8001/api/v1/login" as string, request);
+  };
   return (
     <SafeAreaView className="items-center" style={{ justifyContent: "center" }}>
       <ImageBackground
@@ -35,7 +43,7 @@ const login = () => {
         <Formik
           validationSchema={loginValidationSchema}
           initialValues={{ email: "", password: "" }}
-          onSubmit={(values)=>submitForm(values)}
+          onSubmit={(values) => submitForm(values)}
         >
           {({
             handleChange,
